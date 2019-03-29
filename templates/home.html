@@ -3,12 +3,24 @@
 
 <head>
 
+    <style>
+        #about{
+            width: 30%;
+            float: right;
+            margin-right: 10px;
+        }
+    </style>
+
 </head>
 <bdoy>
     {% include "navbar.html" %}
     {% block content %}
-    <h1>Hello World!</h1>
-    <h2>Home Page</h2>
+    <div class='container'>
+        <div id='about'>
+            <h1>سیستم ثبت دبیرخانه </h1>
+            <h2>این سیستم جهت ثبت و مدیریت نامه های ارسالی و نامه های دریافتی طراحی شده است.</h2>
+        </div>
+    </div>
     {% endblock content %}
 </bdoy>
 
