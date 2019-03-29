@@ -15,6 +15,11 @@
             margin: 5px 5px 5px 1px;
             background-color: #333;
         }
+        #title{
+            text-align: center;
+            border: #ff4518 solid 2px;
+            border-radius: 10px;
+        }
     </style>
 
 </head>
@@ -23,8 +28,7 @@
     {% include "navbar.html" %}
     {% block content %}
     <div id="wrapper" style="padding:5px;">
-        <h1>نامه های دریافتی</h1>
-        <a href=# id="newbutton">جدید</a>
+        <h1 id="title">نتایج جستجو در نامه های ارسالی و نامه های دریافتی</h1>
         <table style="width:100%">
             <tr>
                 <th>شناسه</th>
@@ -34,12 +38,23 @@
                 <th>خلاصه نامه</th>
 
             </tr>
-            {% for item in object %}
+            {% for item in rs %}
             <tr>
-                <td><a href="/chapar/recive/{{item.id}}">{{item.id}}</a></td>
+                <td style="background-color:#ff9848;" ><a href="/chapar/recive/{{item.id}}">{{item.id}}</a></td>
                 <td>{{item.title}}</td>
                 <td>{{item.recive_date}}</td>
                 <td>{{item.recive_number}}</td>
+                <td>{{item.summery}}</td>
+            </tr>
+
+            {% endfor %}
+
+            {% for item in sd %}
+            <tr>
+                <td style="background-color:#ff4518;" ><a href="/chapar/send/{{item.id}}">{{item.id}}</a></td>
+                <td>{{item.title}}</td>
+                <td>{{item.send_date}}</td>
+                <td>{{item.send_number}}</td>
                 <td>{{item.summery}}</td>
             </tr>
 

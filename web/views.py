@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
+from itertools import chain
 from .models import *
 from django.contrib.auth.admin import User
 import json
@@ -23,12 +24,17 @@ def get_sends(request,*args,**kwargs):
 
 #Search-letter by title
 def search_letter(request,*args,**kwargs):
-    obj=Recive.objects.filter(title__contains=request.GET['search_value'])
-    if len(obj)==0:
+    recived = Recive.objects.filter(title__contains=request.GET['search_value'])
+    sent    = Send.objects.filter(title__contains=request.GET['search_value'])
+    print(recived)
+    print(sent)
+    if len(recived)==0 and len(sent)==0:
         return HttpResponse("<h1> نامه ای با این مشخصات یافت نشد.</h1>")
     context={
-        'object':obj
+        'rs':recived,
+        'sd':sent,
     }
+    print(context)
     return render (request,"search_letter.html",context)
 
 def get_letter_by_id(request,my_id):
