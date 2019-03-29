@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Recive
+from .models import *
 from django.contrib.auth.admin import User
 import json
 # Create your views here.
@@ -11,6 +11,15 @@ def get_recives(request,*args,**kwargs):
         "object":obj
     }
     return render(request,'recive.html',context)
+
+# get all sent letter
+def get_sends(request,*args,**kwargs):
+    obj=Send.objects.all()
+    print(obj)
+    context={
+        "object":obj
+    }
+    return render(request,'send.html',context)
 
 #Search-letter by title
 def search_letter(request,*args,**kwargs):

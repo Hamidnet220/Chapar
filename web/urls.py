@@ -1,5 +1,5 @@
 from django.urls import path
-from web.views import chapar_view,get_recives,get_letter_by_id,search_letter,new_letter,create_letter_view
+from web.views import *
 
 urlpatterns=[
     path('',chapar_view,name='chapar'),
@@ -8,4 +8,6 @@ urlpatterns=[
     path('recive/addnew/',new_letter,name='new_letter'),
     path('recive/search/',search_letter,name='search_letter'),
     path('recive/savenew/',create_letter_view,name='create_letter'),
+    path('send/',get_sends,name='send_letters'),
+
 ]

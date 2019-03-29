@@ -9,8 +9,8 @@
 <nav>
     <div class="topnav">
         <a class="active" href="{% url 'home'  %}">صفحه اصلی</a>
-        <a href="{%url 'recive_letters' %}"><i class="fa fa-fw fa-envelope"></i> نامه های دریافتی</a>
-        <a href=#>نامه های ارسالی</a>
+        <a href="{% url 'recive_letters' %}"><i class="fa fa-fw fa-envelope"></i> نامه های دریافتی</a>
+        <a href="{% url 'send_letters' %}">نامه های ارسالی</a>
         <a href="{% url 'about' %}">درباره من</a>
         <form action="{% url 'search_letter' %}" method="GET">
             <input type="text" id="searchTextbox" name='search_value' placeholder="متن مورد نظر را وارد کنید...">
