@@ -32,6 +32,7 @@
                 <th>تاریخ</th>
                 <th>شماره</th>
                 <th>خلاصه نامه</th>
+                <th>لینک نامه</th>
 
             </tr>
             {% for item in object %}
@@ -41,6 +42,8 @@
                 <td>{{item.recive_date}}</td>
                 <td>{{item.recive_number}}</td>
                 <td>{{item.summery}}</td>
+                <td><a href=#></a>{{item.recive_file}}</td>
+
             </tr>
 
             {% endfor %}

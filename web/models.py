@@ -13,6 +13,7 @@ class Recive(models.Model):
     recive_date  = models.DateTimeField()
     recive_number= models.CharField(max_length = 150)
     description  = models.TextField(blank=True,null=True)
+    recive_file  = models.FileField(upload_to='recives')
 
     def __str__(self):
         return "{}-{}".format(self.title,self.recive_date)
@@ -24,6 +25,6 @@ class Send(models.Model):
     send_date    = models.DateTimeField()
     send_number  = models.CharField(max_length = 150)
     description  = models.TextField(blank=True,null=True)
-
+    send_file    = models.FileField(upload_to='sends')
     def __str__(self):
         return "{}-{}".format(self.title,self.send_date)
