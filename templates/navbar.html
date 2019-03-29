@@ -1,0 +1,18 @@
+<head>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>This is chapar website</title>
+    {% endblock head %}
+</head>
+<nav>
+    <div class="topnav">
+        <a class="active" href="{% url 'home'  %}">صفحه اصلی</a>
+        <a href="{%url 'recive_letters' %}"><i class="fa fa-fw fa-envelope"></i> نامه های دریافتی</a>
+        <a href=#>نامه های ارسالی</a>
+        <a href="{% url 'about' %}">درباره من</a>
+        <input type="text" id="searchTextbox" placeholder="متن مورد نظر را وارد کنید...">
+        <a href=#><i class="fa fa-fw fa-search"></i>جستجو</a>
+    </div>
+</nav>

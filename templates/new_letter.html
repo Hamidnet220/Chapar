@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #first{
+            margin: 25px ;
+            padding:25px;
+            width: 30%;
+            background-color: rgba(128, 128, 189, 0.5);
+            border-radius: 15px 5px 15px 5px;
+        }
+        form input{
+            width: 80%;
+        }
+
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <div id="first">
+        <form action="{% url 'create_letter' %}" method="POST">{% csrf_token %}
+            <label for="title">عنوان:</label>
+            <br>
+            <input type="text" name="title" placeholder="عنوان نامه را وارد کنید."/>
+            <br>
+            <label for="summery">خلاصه نامه:</label>
+            <br>
+            <input type="text" name="summery" />
+            <br>
+            <label for="recive_date">تاریخ نامه:</label>
+            <br>
+            <input type="datetime-local" name="recive_date" />  
+            <br>
+            <label for="recive_number">شماره نامه:</label>
+            <br>
+            <input type="text" name="recive_number" />  
+            <br>
+            <br>
+            <input type="submit" name="dsubmit" value="ثبت" style="width:25%;"/>
+        </form>
+    </div>
+
+</body>
+
+</html>

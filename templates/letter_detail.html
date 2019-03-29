@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #header{
+            width: 90%;
+            border-radius: 10px;
+            background-color: rgba(100, 100, 200,0.5);
+            margin: 3% 3% 1% 3%;
+            padding:2%
+            
+        }
+        #letter_body{
+            width: 90%;
+            height: 70%;
+            border-radius: 10px;
+            background-color: rgba(100, 100, 200,0.5);
+            margin: 1% 3% 3% 3%;
+            padding:2%
+        }
+    </style>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    {% block content %}
+    <h1>صفحه مربوط به جزییات نامه شماره </h1>
+    <div id="header">
+    
+    <h3>شماره نامه :{{ object.id }}</h3>
+    <h3>عنوان نامه :{{ object.title }}</h3>
+    <h3>کاربر ایجاد کننده:{{ object.add_by_usr }}</h3>
+    <h3>تاریخ دریافت :{{ object.recive_date }}</h3>
+    <h3>شماره نامه :{{ object.recive_number }}</h3>
+   
+</div>
+<div id="letter_body">
+        <h3>خلاصه نامه :{{ object.summery }}</h3>
+</div>
+{% endblock content %}
+</body>
+
+</html>

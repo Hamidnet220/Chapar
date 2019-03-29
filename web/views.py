@@ -1,0 +1,58 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Recive
+from django.contrib.auth.admin import User
+import json
+# Create your views here.
+def get_recives(request,*args,**kwargs):
+    obj=Recive.objects.all()
+    context={
+        "object":obj
+    }
+    return render(request,'recive.html',context)
+
+def search_letter(request,search_value):
+    obj=Recive.objects.filter(title=search_value)
+    if len(obj)==0:
+        return HttpResponse("<h1> نامه ای با این مشخصات یافت نشد.</h1>")
+    context={
+        "object":obj
+    }
+    return render(request,'recive.html',context)
+
+def get_letter_by_id(request,my_id):
+    obj=Recive.objects.get(id=my_id)
+    context={
+        'object':obj
+    }
+    return render (request,"letter_detail.html",context)
+
+def home_view(request,*args,**kwargs):
+    return render(request,"home.html",{})
+
+def contact_view(request,*args,**kwargs):
+    return HttpResponse('<h1>Contact Page</h>')
+
+def chapar_view(request,*args,**kwargs):
+    return HttpResponse('<h1>You are in the Chapar page</h1>')
+
+def about_view(request,*args,**kwargs):
+    return render(request,"about.html",{})
+
+
+def new_letter(request,*args,**kwargs):
+    return render(request,"new_letter.html",{})
+
+#TODO:validation input data
+def create_letter_view(request,*args,**kwargs):
+    print(request.POST)
+    new_user=User.objects.first()
+    new_title=request.POST['title']
+    new_summery=request.POST['summery']
+    new_recive_date=request.POST['recive_date']
+    new_revice_number=request.POST['recive_number']
+    Recive.objects.create(add_by_usr=new_user,title=new_title,summery=new_summery,recive_date=new_recive_date,
+                        recive_number=new_revice_number,description='ندارد')
+    
+    return render(request,"new_letter.html",{})

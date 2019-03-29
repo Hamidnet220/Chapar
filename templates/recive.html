@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        #newbutton {
+            float: left;
+            color: #f3f3f3;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 3px;
+            padding: 5px;
+            margin: 5px 5px 5px 1px;
+            background-color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    {% block content %}
+    <div id="wrapper" style="padding:5px;">
+        <h1>نامه های دریافتی</h1>
+        <a href="{% url 'new_letter' %}" id="newbutton">جدید</a>
+        <table style="width:100%">
+            <tr>
+                <th>شناسه</th>
+                <th>عنوان</th>
+                <th>تاریخ</th>
+                <th>شماره</th>
+                <th>خلاصه نامه</th>
+
+            </tr>
+            {% for item in object %}
+            <tr>
+                <td><a href="/chapar/recive/{{item.id}}">{{item.id}}</a></td>
+                <td>{{item.title}}</td>
+                <td>{{item.recive_date}}</td>
+                <td>{{item.recive_number}}</td>
+                <td>{{item.summery}}</td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>
