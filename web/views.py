@@ -12,14 +12,15 @@ def get_recives(request,*args,**kwargs):
     }
     return render(request,'recive.html',context)
 
-def search_letter(request,search_value):
-    obj=Recive.objects.filter(title=search_value)
+#Search-letter by title
+def search_letter(request,*args,**kwargs):
+    obj=Recive.objects.filter(title__contains=request.GET['search_value'])
     if len(obj)==0:
         return HttpResponse("<h1> نامه ای با این مشخصات یافت نشد.</h1>")
     context={
-        "object":obj
+        'object':obj
     }
-    return render(request,'recive.html',context)
+    return render (request,"search_letter.html",context)
 
 def get_letter_by_id(request,my_id):
     obj=Recive.objects.get(id=my_id)
