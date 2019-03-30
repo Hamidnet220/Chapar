@@ -6,8 +6,21 @@ def empty_validate_event(value):
     if len(value)<=2:
         raise ValidationError(("You can not leave this field empty!"),params={'value':value},)
 
+
+class Organization(models.Model):
+    add_by_usr   = models.ForeignKey(User,on_delete=models.CASCADE,related_name='add_by_usr_org')
+    title        = models.CharField(max_length = 150,validators=[empty_validate_event])
+    tel          = models.CharField(max_length = 19,blank=True)
+    fax          = models.CharField(max_length = 19,blank=True)
+    is_deleted   = models.BooleanField(default=False)
+    del_by_usr   = models.ForeignKey(User,blank=True,null=True,on_delete=models.SET_NULL,related_name='del_by_usr_org')
+    def __str__(self):
+        return self.title
+
+
 class Recive(models.Model):
     add_by_usr   = models.ForeignKey(User,on_delete=models.CASCADE,related_name='add_by_usr')
+    organization = models.ForeignKey(Organization,on_delete=models.SET_NULL,null=True)
     title        = models.CharField(max_length = 150,validators=[empty_validate_event])
     summery      = models.TextField(blank=True)
     recive_date  = models.DateTimeField()
@@ -22,6 +35,7 @@ class Recive(models.Model):
     
 class Send(models.Model):
     add_by_usr   = models.ForeignKey(User,on_delete=models.CASCADE,related_name='add_by_usr_send')
+    organization = models.ForeignKey(Organization,on_delete=models.SET_NULL,null=True)
     title        = models.CharField(max_length = 150,validators=[empty_validate_event])
     summery      = models.TextField(blank=True)
     send_date    = models.DateTimeField()
