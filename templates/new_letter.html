@@ -2,6 +2,9 @@
 <html>
 
 <head>
+
+        <link rel="stylesheet" href="js-persian-cal.css">
+        <script src="js-persian-cal.min.js"></script>
     <style>
         #first{
             margin: 25px ;
@@ -9,13 +12,15 @@
             width: 30%;
             background-color: rgba(128, 128, 189, 0.5);
             border-radius: 15px 5px 15px 5px;
+
+
         }
         form input{
             width: 80%;
         }
 
-        <link rel="stylesheet" href="js-persian-cal.css">
-        <script src="js-persian-cal.min.js"></script>
+
+       
 
     </style>
 </head>
@@ -24,6 +29,10 @@
     {% include "navbar.html" %}
     <div id="first">
         <form action="{% url 'create_letter' %}" method="POST">{% csrf_token %}
+            <label for="organization">گیرنده/فرستنده:</label>
+            <br>
+            <input type="text" name="organization" placeholder="."/>
+
             <label for="title">عنوان:</label>
             <br>
             <input type="text" name="title" placeholder="عنوان نامه را وارد کنید."/>
@@ -39,8 +48,6 @@
             <label for="recive_number">شماره نامه:</label>
             <br>
             <input type="text" name="recive_number" />  
-            <br>
-            <input type="text" id="pcal1" class="pdate">
             <br>
             <label for="file_path">فایل نامه:</label>
             <br>
