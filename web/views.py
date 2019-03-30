@@ -1,7 +1,8 @@
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from itertools import chain
+from django.conf import settings
 from .models import *
 from django.contrib.auth.admin import User
 import json
@@ -26,15 +27,12 @@ def get_sends(request,*args,**kwargs):
 def search_letter(request,*args,**kwargs):
     recived = Recive.objects.filter(title__contains=request.GET['search_value'])
     sent    = Send.objects.filter(title__contains=request.GET['search_value'])
-    print(recived)
-    print(sent)
     if len(recived)==0 and len(sent)==0:
         return HttpResponse("<h1> نامه ای با این مشخصات یافت نشد.</h1>")
     context={
         'rs':recived,
         'sd':sent,
     }
-    print(context)
     return render (request,"search_letter.html",context)
 
 def get_letter_by_id(request,my_id):
@@ -63,12 +61,22 @@ def new_letter(request,*args,**kwargs):
 #TODO:validation input data
 def create_letter_view(request,*args,**kwargs):
     print(request.POST)
+    print(request.FILES['my_file'])
     new_user=User.objects.first()
     new_title=request.POST['title']
     new_summery=request.POST['summery']
     new_recive_date=request.POST['recive_date']
     new_revice_number=request.POST['recive_number']
+    new_file=request.FILES['my_file']
     Recive.objects.create(add_by_usr=new_user,title=new_title,summery=new_summery,recive_date=new_recive_date,
-                        recive_number=new_revice_number,description='ندارد')
+                        recive_number=new_revice_number,description='ندارد',recive_file=new_file)
+    if Recive.save()==True:
+        return HttpResponse('<h1>file saved<h1>')
+    return HttpResponse('<h1>file not saved<h1>')
+
+def delete_view(request,my_id,*args,**kwargs):
+    obj=Recive.objects.get(id=my_id).delete()
+    return HttpResponse("<h1>نامه مورد نظر حذف شد<h1>")
     
-    return render(request,"new_letter.html",{})
+    
+    

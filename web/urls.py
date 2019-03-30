@@ -9,5 +9,5 @@ urlpatterns=[
     path('recive/search/',search_letter,name='search_letter'),
     path('recive/savenew/',create_letter_view,name='create_letter'),
     path('send/',get_sends,name='send_letters'),
-
+    path('delete/<int:my_id>',delete_view,name='delete_letter'),
 ]
