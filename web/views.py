@@ -2,8 +2,10 @@ import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic.edit import FormView
 from django.conf import settings
 from .models import *
+from .forms import *    
 from django.contrib.auth.admin import User
 import json
 # Create your views here.
@@ -60,8 +62,6 @@ def new_letter(request,*args,**kwargs):
 
 #TODO:validation input data
 def create_letter_view(request,*args,**kwargs):
-    print(request.POST)
-    print(request.FILES['my_file'])
     new_user=User.objects.first()
     new_title=request.POST['title']
     new_summery=request.POST['summery']
@@ -77,6 +77,16 @@ def create_letter_view(request,*args,**kwargs):
 def delete_view(request,my_id,*args,**kwargs):
     obj=Recive.objects.get(id=my_id).delete()
     return HttpResponse("<h1>نامه مورد نظر حذف شد<h1>")
+
+class OrganizationView(FormView):
+    template_name='input_forms.html'
+    form_class=Organization_form
+    success_url = '/chapar/organization/new'
+    
+    def form_valid(self, form):
+        form.add_record()
+        return super().form_valid(form)
+
     
     
     
