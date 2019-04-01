@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="js-persian-cal.css">
         <script src="js-persian-cal.min.js"></script>
     <style>
-        #first{
+        #input-form{
             margin: 25px ;
             padding:25px;
             width: 30%;
@@ -27,7 +27,7 @@
 
 <body>
     {% include "navbar.html" %}
-    <div id="first">
+    <div id="input-form">
         <form action="{% url 'create_letter' %}" method="POST">{% csrf_token %}
             <label for="organization">گیرنده/فرستنده:</label>
             <br>
