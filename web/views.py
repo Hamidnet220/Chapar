@@ -57,22 +57,23 @@ def about_view(request,*args,**kwargs):
     return render(request,"about.html",{})
 
 
-def new_letter(request,*args,**kwargs):
-    return render(request,"new_letter.html",{})
+class ReciveLetterView(FormView):
+    template_name='input_forms.html'
+    form_class=Recive_Letter_form
+    success_url='recive/addnew/'
 
-#TODO:validation input data
-def create_letter_view(request,*args,**kwargs):
-    new_user=User.objects.first()
-    new_title=request.POST['title']
-    new_summery=request.POST['summery']
-    new_recive_date=request.POST['recive_date']
-    new_revice_number=request.POST['recive_number']
-    new_file=request.FILES['my_file']
-    Recive.objects.create(add_by_usr=new_user,title=new_title,summery=new_summery,recive_date=new_recive_date,
-                        recive_number=new_revice_number,description='ندارد',recive_file=new_file)
-    if Recive.save()==True:
-        return HttpResponse('<h1>file saved<h1>')
-    return HttpResponse('<h1>file not saved<h1>')
+    def form_valid(self, form):
+        form.add_record()
+        return super().form_valid(form)
+
+class SendLetterView(FormView):
+    template_name='input_forms.html'
+    form_class=Send_Letter_form
+    success_url='/home/'
+
+    def form_valid(self, form):
+        form.add_record()
+        return super().form_valid(form)
 
 def delete_view(request,my_id,*args,**kwargs):
     obj=Recive.objects.get(id=my_id).delete()
