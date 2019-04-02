@@ -5,6 +5,25 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>This is chapar website</title>
     {% endblock head %}
+    <style>
+        .menu-button {
+            width: 35px;
+            height: 5px;
+            background-color: aliceblue;
+            margin: 6px 0;
+        }
+
+        #menu-button {
+            float: left;
+            margin-top: 6px;
+        }
+
+        #searchTextbox {
+            float: right;
+            margin: 14px 10px 10px 4px;
+            width: 25%;
+        }
+    </style>
 </head>
 <nav>
     <div class="topnav">
@@ -12,9 +31,12 @@
         <a href="{% url 'recive_letters' %}"><i class="fa fa-fw fa-envelope"></i> نامه های دریافتی</a>
         <a href="{% url 'send_letters' %}">نامه های ارسالی</a>
         <a href="{% url 'about' %}">درباره من</a>
-        <form action="{% url 'search_letter' %}" method="GET">
-            <input type="text" id="searchTextbox" name='search_value' placeholder="متن مورد نظر را وارد کنید...">
-            <input type="submit" value='جستجو'>
-        </form>
+        <input type="text" id="searchTextbox" name='search_value' placeholder="متن مورد نظر را وارد کنید...">
+        <a href=#><i class="fa fa-fw fa-search"></i>جستجو</a>
+        <div id='menu-button'>
+            <div class='menu-button'></div>
+            <div class='menu-button'></div>
+            <div class='menu-button'></div>
+        </div>
     </div>
 </nav>
